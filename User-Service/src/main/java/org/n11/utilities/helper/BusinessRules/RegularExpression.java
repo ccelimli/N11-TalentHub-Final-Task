@@ -1,4 +1,4 @@
-package org.n11.utilities.helper;
+package org.n11.utilities.helper.BusinessRules;
 
 import org.n11.constant.BusinessRulesConstants;
 import org.n11.constant.ErrorMessages;
@@ -13,8 +13,8 @@ import java.util.regex.Pattern;
  * @author Çağatay Çelimli
  */
 @Service
-public class BusinessRules {
-    public static boolean controlFirstNameAndLAstName(String firstName, String lastName) {
+public class RegularExpression {
+    public static boolean controlFirstNameAndLastName(String firstName, String lastName) {
         Pattern pattern = Pattern.compile(BusinessRulesConstants.FIRST_NAME_LAST_NAME_REGEX.getContext());
         if (!pattern.matcher(firstName).matches()) {
             throw new IllegalArgumentException(ErrorMessages.NOT_VALID_FIRST_NAME.getMessage());
@@ -40,14 +40,15 @@ public class BusinessRules {
 
     public static boolean controlPhoneNumber(String phoneNumber) {
         Pattern pattern = Pattern.compile(BusinessRulesConstants.PHONE_NUMBER_REGEX.getContext());
-        if (phoneNumber.startsWith("0")){
+
+        if (phoneNumber.startsWith("0")) {
             throw new IllegalArgumentException(ErrorMessages.NOT_START_ZERO_PHONE_NUMBER.getMessage());
         }
-        if (!pattern.matcher(phoneNumber).matches()) {
+
+        else if (!pattern.matcher(phoneNumber).matches()) {
             throw new IllegalArgumentException(ErrorMessages.NOT_VALID_PHONE_NUMBER.getMessage());
         }
-        else{
-            return true;
-        }
+
+        return true;
     }
 }

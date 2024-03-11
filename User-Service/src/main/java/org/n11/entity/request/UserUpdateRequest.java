@@ -16,6 +16,7 @@ public record UserUpdateRequest(
         String lastName,
         LocalDate birthDate,
         String email,
+        String phoneNumber,
         String username,
         String password,
         Gender gender

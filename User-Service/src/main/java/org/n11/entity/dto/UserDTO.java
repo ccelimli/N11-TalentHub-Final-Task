@@ -15,6 +15,7 @@ public record UserDTO(Long id,
                       String lastName,
                       LocalDate birthDate,
                       String email,
+                      String phoneNumber,
                       String username,
                       Gender gender) {
 }

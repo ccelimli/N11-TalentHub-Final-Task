@@ -7,6 +7,7 @@ import org.mapstruct.factory.Mappers;
 import org.n11.entity.User;
 import org.n11.entity.dto.UserDTO;
 import org.n11.entity.request.UserSaveRequest;
+import org.n11.entity.request.UserUpdateRequest;
 
 import java.util.List;
 
@@ -21,8 +22,11 @@ public interface UserMapper {
     UserMapper INSTANCE= Mappers.getMapper(UserMapper.class);
 
     @Mapping(target = "status", constant = "ACTIVE")
+    @Mapping(target = "phoneNumber", expression = "java(userSaveRequest.countryCode().getContext() + userSaveRequest.phoneNumber())")
     User convertToUser(UserSaveRequest userSaveRequest);
 
     UserDTO convertToDTO(User user);
     List<UserDTO> convertToDTOs(List<User> user);
+
+    User updateUser(UserUpdateRequest userUpdateRequest);
 }

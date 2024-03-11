@@ -10,7 +10,7 @@ public enum BusinessRulesConstants {
 
     EMAIL_REGEX("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"),
     FIRST_NAME_LAST_NAME_REGEX("^[a-zA-ZçÇğĞıİöÖşŞüÜ]+$"),
-    PHONE_NUMBER_REGEX("^\\+(?:[0-9] ?){6,14}[0-9]$");
+    PHONE_NUMBER_REGEX("^[1-9]\\d{9,}$");
 
     private String context;
 
