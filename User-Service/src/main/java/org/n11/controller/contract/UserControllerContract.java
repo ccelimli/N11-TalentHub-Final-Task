@@ -14,9 +14,11 @@ import java.util.List;
  */
 public interface UserControllerContract {
     UserDTO save(UserSaveRequest userSaveRequest);
-    UserDTO update(Long id, UserUpdateRequest userUpdateRequest);
-    UserDTO getUserById(Long id);
+    UserDTO update( UserUpdateRequest userUpdateRequest);
+    UserDTO findById(Long id);
     List<UserDTO> findAll();
+    List<UserDTO> findAllByDeactive();
+    UserDTO findByIdInDeactive(Long id);
     String delete(Long id);
     UserDTO active(Long id);
     UserDTO deactive(Long id);

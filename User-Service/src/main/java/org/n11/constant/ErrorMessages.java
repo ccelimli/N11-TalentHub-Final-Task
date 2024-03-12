@@ -9,6 +9,7 @@ import org.n11.utilities.general.messageService.BaseErrorMessage;
  * @author Çağatay Çelimli
  */
 public enum ErrorMessages implements BaseErrorMessage {
+    NOT_FOUND_USER("Not Found User!"),
     NOT_VALID_FIRST_NAME("Not Valid User First Name!"),
     NOT_VALID_LAST_NAME("Not Valid User Last Name!"),
     NOT_VALID_PHONE_NUMBER("Not Valid Phone Number!"),

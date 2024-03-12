@@ -17,5 +17,7 @@ public record UserDTO(Long id,
                       String email,
                       String phoneNumber,
                       String username,
-                      Gender gender) {
+                      Gender gender,
+                      Double latitude,
+                      Double longitude) {
 }

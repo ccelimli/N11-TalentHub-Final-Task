@@ -1,5 +1,7 @@
 package org.n11.entity.request;
 
+import jakarta.persistence.Column;
+import jakarta.validation.constraints.NotBlank;
 import org.n11.constant.CountryCode;
 import org.n11.entity.enums.Gender;
 
@@ -21,6 +23,8 @@ public record UserUpdateRequest(
         String phoneNumber,
         String username,
         String password,
-        Gender gender
-){
+        Gender gender,
+        Double latitude,
+        Double longitude
+) {
 }
