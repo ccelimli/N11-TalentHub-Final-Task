@@ -17,7 +17,7 @@ public interface UserControllerContract {
     UserDTO update(Long id, UserUpdateRequest userUpdateRequest);
     UserDTO getUserById(Long id);
     List<UserDTO> findAll();
-    void delete(Long id);
-    void active(Long id);
-    void deactive(Long id);
+    String delete(Long id);
+    UserDTO active(Long id);
+    UserDTO deactive(Long id);
 }

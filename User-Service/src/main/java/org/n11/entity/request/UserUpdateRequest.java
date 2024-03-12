@@ -1,5 +1,6 @@
 package org.n11.entity.request;
 
+import org.n11.constant.CountryCode;
 import org.n11.entity.enums.Gender;
 
 import java.time.LocalDate;
@@ -16,6 +17,7 @@ public record UserUpdateRequest(
         String lastName,
         LocalDate birthDate,
         String email,
+        CountryCode countryCode,
         String phoneNumber,
         String username,
         String password,

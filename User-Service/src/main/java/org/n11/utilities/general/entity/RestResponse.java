@@ -18,12 +18,16 @@ public class RestResponse<T> {
     private T data;
     private LocalDateTime responseDate;
     private boolean isSuccess;
-    private String messages;
+    private String message;
 
     public RestResponse(T data, boolean isSuccess){
         this.data = data;
         this.isSuccess = isSuccess;
         this.responseDate = LocalDateTime.now();
+    }
+    public RestResponse(String message,boolean isSuccess){
+        this.message=message;
+        this.isSuccess=isSuccess;
     }
 
     public static <T> RestResponse<T> of(T t){
@@ -36,6 +40,9 @@ public class RestResponse<T> {
 
     public static <T> RestResponse<T> empty(){
         return new RestResponse<>(null, true);
+    }
+    public static <T> RestResponse<T> message(String message){
+        return new RestResponse<>(message, true);
     }
 }
 

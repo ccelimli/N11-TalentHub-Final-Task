@@ -1,6 +1,9 @@
 package org.n11.controller.contract.impl;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.aspectj.bridge.Message;
+import org.n11.constant.Messages;
 import org.n11.controller.contract.UserControllerContract;
 import org.n11.entity.User;
 import org.n11.entity.dto.UserDTO;
@@ -38,14 +41,16 @@ public class UserControllerContractImpl implements UserControllerContract {
         return UserMapper.INSTANCE.convertToDTO(user);
     }
 
+    @Transactional
     @Override
     public UserDTO update(Long id,UserUpdateRequest userUpdateRequest) {
+        User user=this.userEntityService.findByIdWithControl(userUpdateRequest.id());
         RegularExpression.controlEmail(userUpdateRequest.email());
         RegularExpression.controlPhoneNumber(userUpdateRequest.phoneNumber());
         RegularExpression.controlFirstNameAndLastName(userUpdateRequest.firstName(),userUpdateRequest.lastName());
 
-        User user=this.userEntityService.findByIdWithControl(userUpdateRequest.id());
-        UserMapper.INSTANCE.updateUser(userUpdateRequest);
+        UserMapper.INSTANCE.updateUser(user,userUpdateRequest);
+        this.userEntityService.save(user);
         return UserMapper.INSTANCE.convertToDTO(user);
 
 
@@ -53,7 +58,9 @@ public class UserControllerContractImpl implements UserControllerContract {
 
     @Override
     public UserDTO getUserById(Long id) {
-        return null;
+        User user= this.userEntityService.findByIdWithControl(id);
+
+        return UserMapper.INSTANCE.convertToDTO(user);
     }
 
     @Override
@@ -67,17 +74,23 @@ public class UserControllerContractImpl implements UserControllerContract {
     }
 
     @Override
-    public void delete(Long id) {
-
+    public String delete(Long id) {
+        User user= this.userEntityService.findByIdWithControl(id);
+        this.userEntityService.delete(user);
+        return Messages.USER_DELETED.getMessage();
     }
 
     @Override
-    public void active(Long id) {
-
+    public UserDTO active(Long id) {
+        User user=this.userEntityService.findByIdWithControl(id);
+        this.userEntityService.changeStatusToActive(user.getId());
+        return UserMapper.INSTANCE.convertToDTO(user);
     }
 
     @Override
-    public void deactive(Long id) {
-
+    public UserDTO deactive(Long id) {
+        User user=this.userEntityService.findByIdWithControl(id);
+        this.userEntityService.changeStatusToDeactive(user.getId());
+        return UserMapper.INSTANCE.convertToDTO(user);
     }
 }

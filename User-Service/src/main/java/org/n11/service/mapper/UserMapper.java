@@ -2,6 +2,7 @@ package org.n11.service.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 import org.n11.entity.User;
@@ -28,5 +29,6 @@ public interface UserMapper {
     UserDTO convertToDTO(User user);
     List<UserDTO> convertToDTOs(List<User> user);
 
-    User updateUser(UserUpdateRequest userUpdateRequest);
+    @Mapping(target = "phoneNumber", expression = "java(userUpdateRequest.countryCode().getContext() + userUpdateRequest.phoneNumber())")
+    User updateUser(@MappingTarget User user, UserUpdateRequest userUpdateRequest);
 }
