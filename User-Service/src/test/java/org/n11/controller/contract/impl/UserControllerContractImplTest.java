@@ -269,4 +269,23 @@ public class UserControllerContractImplTest {
         assertThrows(ItemNotFoundException.class, () -> userControllerContractImpl.delete(id));
         verify(userEntityService, times(1)).findByIdWithControl(id);
     }
+
+    @Test
+    public void shouldFindByIdInDeactive(){
+        // Given
+        Long id = 1L;
+        User user = new User();
+        user.setId(id);
+        user.setStatus(Status.DEACTIVE);
+
+        // When
+        when(userEntityService.findByIdWithControl(id)).thenReturn(user);
+        when(userEntityService.findAll()).thenReturn(List.of(user));
+
+        UserDTO result = userControllerContractImpl.findByIdInDeactive(id); // Replace methodName with the actual method name
+
+        // Then
+        assertNotNull(result);
+        assertEquals(id, result.id());
+    }
 }
