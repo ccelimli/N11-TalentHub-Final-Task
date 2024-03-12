@@ -41,6 +41,10 @@ public class RegularExpression {
     public static boolean controlPhoneNumber(String phoneNumber) {
         Pattern pattern = Pattern.compile(BusinessRulesConstants.PHONE_NUMBER_REGEX.getContext());
 
+        if (phoneNumber==null){
+            throw new NullPointerException(ErrorMessages.NOT_NULL_PHONE_NUMBER.getMessage());
+        }
+
         if (phoneNumber.startsWith("0")) {
             throw new IllegalArgumentException(ErrorMessages.NOT_START_ZERO_PHONE_NUMBER.getMessage());
         }
