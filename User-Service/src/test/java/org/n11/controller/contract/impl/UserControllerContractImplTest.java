@@ -5,6 +5,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.n11.constant.CountryCode;
+import org.n11.constant.ErrorMessages;
 import org.n11.constant.Messages;
 import org.n11.entity.User;
 import org.n11.entity.dto.UserDTO;
@@ -18,6 +19,7 @@ import org.n11.utilities.exceptions.ItemNotFoundException;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -197,7 +199,7 @@ public class UserControllerContractImplTest {
 
 
         // When
-        when(userEntityService.findByIdWithControl(id)).thenReturn(user);
+        Mockito.when(userEntityService.findByIdWithControl(id)).thenReturn(user);
         String result = userControllerContractImpl.delete(id);
 
         // Then
@@ -211,7 +213,7 @@ public class UserControllerContractImplTest {
         // Given
         Long id = 156L;
 
-        when(userEntityService.findByIdWithControl(id)).thenReturn(null);
+        Mockito.when(userEntityService.findByIdWithControl(id)).thenReturn(null);
 
         // When
         assertThrows(ItemNotFoundException.class, () -> userControllerContractImpl.delete(id));
@@ -227,7 +229,7 @@ public class UserControllerContractImplTest {
 
 
         // When
-        when(userEntityService.findByIdWithControl(id)).thenReturn(null);
+        Mockito.when(userEntityService.findByIdWithControl(id)).thenReturn(null);
 
         // Then
         assertThrows(ItemNotFoundException.class, () -> userControllerContractImpl.active(id));
@@ -239,7 +241,7 @@ public class UserControllerContractImplTest {
         Long id = 156L;
 
         // When
-        when(userEntityService.findByIdWithControl(id)).thenReturn(null);
+        Mockito.when(userEntityService.findByIdWithControl(id)).thenReturn(null);
 
         // Then
         assertThrows(ItemNotFoundException.class, () -> userControllerContractImpl.deactive(id));
@@ -251,7 +253,7 @@ public class UserControllerContractImplTest {
         Long id = 156L;
 
         // When
-        when(userEntityService.findByIdWithControl(id)).thenReturn(null);
+        Mockito.when(userEntityService.findByIdWithControl(id)).thenReturn(null);
 
         // Then
         assertThrows(ItemNotFoundException.class, () -> userControllerContractImpl.delete(id));
@@ -263,7 +265,7 @@ public class UserControllerContractImplTest {
         Long id = 156L;
 
         // When
-        when(userEntityService.findByIdWithControl(id)).thenReturn(null);
+        Mockito.when(userEntityService.findByIdWithControl(id)).thenReturn(null);
 
         // Then
         assertThrows(ItemNotFoundException.class, () -> userControllerContractImpl.delete(id));
@@ -279,13 +281,54 @@ public class UserControllerContractImplTest {
         user.setStatus(Status.DEACTIVE);
 
         // When
-        when(userEntityService.findByIdWithControl(id)).thenReturn(user);
-        when(userEntityService.findAll()).thenReturn(List.of(user));
+        Mockito.when(userEntityService.findByIdWithControl(id)).thenReturn(user);
+        Mockito.when(userEntityService.findAll()).thenReturn(List.of(user));
 
         UserDTO result = userControllerContractImpl.findByIdInDeactive(id); // Replace methodName with the actual method name
 
         // Then
         assertNotNull(result);
         assertEquals(id, result.id());
+    }
+
+    @Test
+    public void shouldActive() {
+        // Given
+        Long id = 1L;
+        User user = new User();
+        user.setId(id);
+        user.setStatus(Status.ACTIVE);
+
+        Mockito.when(userEntityService.findById(id)).thenReturn(Optional.of(user));
+
+        // When
+        userEntityService.changeStatusToActive(id);
+
+        // Then
+        User tempUser = userEntityService.findById(id).orElseThrow(() -> new ItemNotFoundException(ErrorMessages.NOT_FOUND_USER));
+        Mockito.verify(userEntityService, Mockito.times(1)).findById(id);
+        assertEquals(user.getId(), tempUser.getId());
+        assertEquals(Status.ACTIVE, tempUser.getStatus());
+    }
+
+    @Test
+    public void shouldDeactive() {
+        // Given
+        Long id = 1L;
+        User user = new User();
+        user.setId(id);
+        user.setStatus(Status.DEACTIVE);
+
+        // Mock the behavior of the repository
+        Mockito.when(userEntityService.findById(id)).thenReturn(Optional.of(user));
+
+        // When
+        userEntityService.changeStatusToActive(id);
+
+        // Then
+        User tempUser = userEntityService.findById(id).orElseThrow(() -> new ItemNotFoundException(ErrorMessages.NOT_FOUND_USER));
+        Mockito.verify(userEntityService, Mockito.times(1)).findById(id);
+        assertEquals(user.getId(), tempUser.getId());
+        assertEquals(Status.DEACTIVE, tempUser.getStatus()); // Assuming the status should be ACTIVE after the change
     }
 }

@@ -87,4 +87,43 @@ public class RegularExpressionTest {
         // When & Then
         assertThrows(NullPointerException.class, () -> RegularExpression.controlEmail(email));
     }
+
+    @Test
+    public void testControlPhoneNumber_ValidPhoneNumber() {
+        // Given
+        String phoneNumber = "1234567890"; // Assuming this matches the regex pattern
+
+        // When
+        boolean result = RegularExpression.controlPhoneNumber(phoneNumber);
+
+        // Then
+        assertTrue(result);
+    }
+
+    @Test
+    public void testControlPhoneNumber_InvalidPhoneNumber() {
+        // Given
+        String phoneNumber = "123456789"; // Assuming this does not match the regex pattern
+
+        // When & Then
+        assertThrows(IllegalArgumentException.class, () -> RegularExpression.controlPhoneNumber(phoneNumber));
+    }
+
+    @Test
+    public void testControlPhoneNumber_PhoneNumberStartsWithZero() {
+        // Given
+        String phoneNumber = "0123456789"; // Starts with "0"
+
+        // When & Then
+        assertThrows(IllegalArgumentException.class, () -> RegularExpression.controlPhoneNumber(phoneNumber));
+    }
+
+    @Test
+    public void testControlPhoneNumber_NullPhoneNumber() {
+        // Given
+        String phoneNumber = null;
+
+        // When & Then
+        assertThrows(NullPointerException.class, () -> RegularExpression.controlPhoneNumber(phoneNumber));
+    }
 }

@@ -28,7 +28,15 @@ public class RestResponse<T> {
     public RestResponse(String message,boolean isSuccess){
         this.message=message;
         this.isSuccess=isSuccess;
+        this.responseDate = LocalDateTime.now();
     }
+    public RestResponse(boolean isSuccess){
+        this.isSuccess=isSuccess;
+        this.responseDate = LocalDateTime.now();
+    }
+    public RestResponse(){
+        this.responseDate = LocalDateTime.now();
+    };
 
     public static <T> RestResponse<T> of(T t){
         return new RestResponse<>(t, true);
