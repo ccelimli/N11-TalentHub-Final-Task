@@ -31,7 +31,7 @@ public class RestaurantController {
         return ResponseEntity.ok(RestResponse.of(this.restaurantControllerContact.save(restaurantSaveRequest)));
     }
 
-    @DeleteMapping("{/id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<RestResponse<String>> delete(@PathVariable String id){
         return ResponseEntity.ok(RestResponse.of(this.restaurantControllerContact.deleteRestaurant(id)));
     }
@@ -46,12 +46,12 @@ public class RestaurantController {
         return ResponseEntity.ok(RestResponse.of(this.restaurantControllerContact.findAllRestaurants()));
     }
 
-    @GetMapping("{/id}")
+    @GetMapping("/{id}")
     public ResponseEntity<RestResponse<RestaurantDTO>> findById(@PathVariable String id){
         return ResponseEntity.ok(RestResponse.of(this.restaurantControllerContact.findById(id)));
     }
 
-    @GetMapping("/{id}")
+    @PatchMapping("/{id}")
     public ResponseEntity<RestResponse<RestaurantDTO>> changeToActivity(@PathVariable String id,@RequestBody RestaurantUpdateActivityRequest restaurantUpdateActivityRequest){
         return ResponseEntity.ok(RestResponse.of(this.restaurantControllerContact.changeToActivity(restaurantUpdateActivityRequest)));
     }

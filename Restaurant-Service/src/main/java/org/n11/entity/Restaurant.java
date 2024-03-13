@@ -21,7 +21,7 @@ import java.util.UUID;
 @SolrDocument(solrCoreName = "restaurants")
 @Getter
 @Setter
-public class Restaurant extends BaseEntity {
+public class Restaurant {
 
     @Id
     @Indexed(name = "id", type = "string")

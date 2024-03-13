@@ -2,6 +2,7 @@ package org.n11.service.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 import org.n11.entity.Restaurant;
@@ -28,5 +29,5 @@ public interface RestaurantMapper {
 
     List<RestaurantDTO> convertToDTOS(List<Restaurant> restaurant);
 
-    Restaurant convertTOUpdate(Restaurant restaurant, RestaurantUpdateRequest restaurantUpdateRequest);
+    Restaurant convertTOUpdate(@MappingTarget Restaurant restaurant, RestaurantUpdateRequest restaurantUpdateRequest);
 }
