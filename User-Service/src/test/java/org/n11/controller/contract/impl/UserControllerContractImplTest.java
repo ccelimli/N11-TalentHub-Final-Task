@@ -220,7 +220,7 @@ public class UserControllerContractImplTest {
 
         // Then
         verify(userEntityService, times(1)).findByIdWithControl(id);
-        verify(userEntityService, times(0)).delete(any(User.class)); // Ensure delete is not called
+        verify(userEntityService, times(0)).delete(any(User.class));
     }
     @Test
     public void shouldUserNotFound_Active() {
@@ -284,7 +284,7 @@ public class UserControllerContractImplTest {
         Mockito.when(userEntityService.findByIdWithControl(id)).thenReturn(user);
         Mockito.when(userEntityService.findAll()).thenReturn(List.of(user));
 
-        UserDTO result = userControllerContractImpl.findByIdInDeactive(id); // Replace methodName with the actual method name
+        UserDTO result = userControllerContractImpl.findByIdInDeactive(id);
 
         // Then
         assertNotNull(result);
@@ -319,7 +319,6 @@ public class UserControllerContractImplTest {
         user.setId(id);
         user.setStatus(Status.DEACTIVE);
 
-        // Mock the behavior of the repository
         Mockito.when(userEntityService.findById(id)).thenReturn(Optional.of(user));
 
         // When
