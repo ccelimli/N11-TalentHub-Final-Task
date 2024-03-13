@@ -9,6 +9,7 @@ import org.n11.entity.enums.Activity;
  * @author Çağatay Çelimli
  */
 public record RestaurantUpdateActivityRequest (
+        String id,
         Activity activity
 
 ){

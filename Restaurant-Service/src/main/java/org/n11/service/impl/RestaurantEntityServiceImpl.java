@@ -3,6 +3,7 @@ package org.n11.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.n11.constant.Messages;
 import org.n11.entity.Restaurant;
+import org.n11.entity.enums.Activity;
 import org.n11.repository.RestaurantRepository;
 import org.n11.service.RestaurantEntityService;
 import org.springframework.stereotype.Service;
@@ -52,5 +53,10 @@ public class RestaurantEntityServiceImpl implements RestaurantEntityService {
     @Override
     public Restaurant changeToActivity(Restaurant restaurant) {
         return this.restaurantRepository.save(restaurant);
+    }
+
+    @Override
+    public List<Restaurant> findByActivity(Activity activity) {
+        return this.restaurantRepository.findByActivity(activity);
     }
 }

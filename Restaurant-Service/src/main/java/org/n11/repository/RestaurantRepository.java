@@ -1,7 +1,11 @@
 package org.n11.repository;
 
 import org.n11.entity.Restaurant;
+import org.n11.entity.enums.Activity;
+import org.springframework.data.solr.repository.Query;
 import org.springframework.data.solr.repository.SolrCrudRepository;
+
+import java.util.List;
 
 
 /**
@@ -11,4 +15,6 @@ import org.springframework.data.solr.repository.SolrCrudRepository;
  * @author Çağatay Çelimli
  */
 public interface RestaurantRepository extends SolrCrudRepository<Restaurant, String> {
+    @Query
+    List<Restaurant> findByActivity(Activity activity);
 }

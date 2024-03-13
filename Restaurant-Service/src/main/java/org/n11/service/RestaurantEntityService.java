@@ -1,6 +1,7 @@
 package org.n11.service;
 
 import org.n11.entity.Restaurant;
+import org.n11.entity.enums.Activity;
 
 import java.util.List;
 
@@ -23,5 +24,6 @@ public interface RestaurantEntityService {
     Iterable<Restaurant> findAllRestaurants();
     Restaurant findById(String id);
     Restaurant changeToActivity(Restaurant restaurant);
+    List<Restaurant> findByActivity(Activity activity);
 
 }
