@@ -1,8 +1,8 @@
 package org.n11.controller.contract;
 
+import org.n11.entity.dto.RestaurantDTO;
 import org.n11.entity.dto.UserReviewDTO;
 import org.n11.entity.request.UserReviewSaveRequest;
-import org.n11.entity.request.UserReviewUpdateRequest;
 import org.n11.entity.request.UserReviewUpdateTextRequest;
 
 import java.util.List;
@@ -15,10 +15,8 @@ import java.util.List;
  */
 public interface UserReviewControllerContract {
     UserReviewDTO save(UserReviewSaveRequest userReviewSaveRequest);
-    UserReviewDTO update( UserReviewUpdateRequest userReviewUpdateRequest);
     UserReviewDTO findById(Long id);
     List<UserReviewDTO> findAll();
     String delete(Long id);
     UserReviewDTO updateByReviewText(UserReviewUpdateTextRequest userReviewUpdateTextRequest);
-
 }

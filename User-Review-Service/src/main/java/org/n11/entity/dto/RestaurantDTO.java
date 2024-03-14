@@ -17,6 +17,7 @@ public record RestaurantDTO(
         LocalTime closingTime,
         Double latitude,
         Double longitude,
-        String status
+        String status,
+        Double averageDTO
 ) {
 }

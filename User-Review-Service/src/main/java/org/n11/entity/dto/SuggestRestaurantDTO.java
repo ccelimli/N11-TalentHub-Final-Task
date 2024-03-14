@@ -15,6 +15,7 @@ public record SuggestRestaurantDTO(
         String website,
         LocalTime openingTime,
         LocalTime closingTime,
-        String status
+        String status,
+        Double averageDTO
 ) {
 }

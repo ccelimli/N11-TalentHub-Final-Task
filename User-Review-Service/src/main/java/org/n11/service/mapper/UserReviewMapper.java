@@ -9,7 +9,6 @@ import org.n11.entity.dto.RestaurantDTO;
 import org.n11.entity.dto.UserDTO;
 import org.n11.entity.dto.UserReviewDTO;
 import org.n11.entity.request.UserReviewSaveRequest;
-import org.n11.entity.request.UserReviewUpdateRequest;
 import org.n11.entity.request.UserReviewUpdateTextRequest;
 
 import java.util.List;
@@ -36,8 +35,6 @@ public interface UserReviewMapper {
     UserReviewDTO convertToDTO(UserReview userReview, UserDTO userDTO, RestaurantDTO restaurantDTO);
 
     List<UserReviewDTO> userReviewDTOs(List<UserReview> userReviewList, List<UserDTO> userDTOS, RestaurantDTO restaurantDTO);
-
-    UserReview updateEntity(UserReview userReview, UserReviewUpdateRequest userReviewUpdateRequest);
 
     UserReview updateText(UserReview userReview, UserReviewUpdateTextRequest userReviewUpdateTextRequest);
 }
