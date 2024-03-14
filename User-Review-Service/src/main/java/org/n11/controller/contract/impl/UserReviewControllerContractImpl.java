@@ -78,7 +78,7 @@ public class UserReviewControllerContractImpl implements UserReviewControllerCon
     @Transactional
     public UserReviewDTO updateByReviewText(UserReviewUpdateTextRequest userReviewUpdateTextRequest) {
         UserReview userReview=checkUserReview(userReviewUpdateTextRequest.id());
-        userReview=UserReviewMapper.INSTANCE.updateText(userReview, userReviewUpdateTextRequest);
+        UserReviewMapper.INSTANCE.updateText(userReview, userReviewUpdateTextRequest);
         UserDTO userDTO= getUserDetails(userReview.getUserId());
         RestaurantDTO restaurantDTO=getRestaurantDetails(userReview.getRestaurantId());
         return UserReviewMapper.INSTANCE.convertToDTO(userReview,userDTO,restaurantDTO);

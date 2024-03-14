@@ -27,15 +27,18 @@ public interface UserReviewMapper {
     UserReview convertToEntity(UserReviewSaveRequest userReviewSaveRequest);
 
     @Mapping(target = "id", source = "userReview.id")
-    @Mapping(target = "userFullName", expression = "java(userDTO.firstName + ' ' + userDTO.lastName)")
+    @Mapping(target = "fullName", expression = "java(userDTO.firstName() + ' ' + userDTO.lastName())")
     @Mapping(target = "restaurantName", source = "restaurantDTO.name")
     @Mapping(target = "reviewText", source = "userReview.reviewText")
     @Mapping(target = "rate", source = "userReview.rate")
     @Mapping(target = "reviewDate", source = "userReview.reviewDate")
     UserReviewDTO convertToDTO(UserReview userReview, UserDTO userDTO, RestaurantDTO restaurantDTO);
 
-    List<UserReviewDTO> userReviewDTOs(List<UserReview> userReviewList, List<UserDTO> userDTOS, RestaurantDTO restaurantDTO);
+    //List<UserReviewDTO> userReviewDTOs(List<UserReview> userReviewList, List<UserDTO> userDTOS, RestaurantDTO restaurantDTO);
 
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "reviewText", source ="userReviewUpdateTextRequest.reviewText")
+    @Mapping(target = "rate", source ="userReviewUpdateTextRequest.rate")
     UserReview updateText(UserReview userReview, UserReviewUpdateTextRequest userReviewUpdateTextRequest);
 
 
