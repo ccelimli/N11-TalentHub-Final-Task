@@ -18,6 +18,7 @@ import org.n11.utilities.exceptions.ItemNotFoundException;
 import org.n11.utilities.general.entity.RestResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.AbstractMap;
 import java.util.List;
@@ -74,12 +75,26 @@ public class UserReviewControllerContractImpl implements UserReviewControllerCon
     }
 
     @Override
+    @Transactional
     public UserReviewDTO updateByReviewText(UserReviewUpdateTextRequest userReviewUpdateTextRequest) {
         UserReview userReview=checkUserReview(userReviewUpdateTextRequest.id());
         userReview=UserReviewMapper.INSTANCE.updateText(userReview, userReviewUpdateTextRequest);
         UserDTO userDTO= getUserDetails(userReview.getUserId());
         RestaurantDTO restaurantDTO=getRestaurantDetails(userReview.getRestaurantId());
         return UserReviewMapper.INSTANCE.convertToDTO(userReview,userDTO,restaurantDTO);
+    }
+
+    @Override
+    public List<UserReviewDTO> findByResturantId(String id){
+        List<UserReview> userReviewList=this.userReviewEntityService.findByRestaurantIdUserReviews(id);
+        List<UserReviewDTO> userReviewDTOList=null;
+        for(UserReview userReview: userReviewList){
+            UserDTO userDTO= getUserDetails(userReview.getUserId());
+            RestaurantDTO restaurantDTO=getRestaurantDetails(userReview.getRestaurantId());
+            UserReviewDTO userReviewDTO=UserReviewMapper.INSTANCE.convertToDTO(userReview,userDTO,restaurantDTO);
+            userReviewDTOList.add(userReviewDTO);
+        }
+        return userReviewDTOList;
     }
 
     private UserReview checkUserReview(Long id){

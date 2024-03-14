@@ -37,4 +37,6 @@ public interface UserReviewMapper {
     List<UserReviewDTO> userReviewDTOs(List<UserReview> userReviewList, List<UserDTO> userDTOS, RestaurantDTO restaurantDTO);
 
     UserReview updateText(UserReview userReview, UserReviewUpdateTextRequest userReviewUpdateTextRequest);
+
+
 }
