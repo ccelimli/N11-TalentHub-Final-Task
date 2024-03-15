@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.AbstractMap;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -56,7 +57,7 @@ public class UserReviewControllerContractImpl implements UserReviewControllerCon
     @Override
     public List<UserReviewDTO> findAll() {
        List<UserReview> userReviewList= this.userReviewEntityService.findAll();
-       List<UserReviewDTO> userReviewDTOList = null;
+       List<UserReviewDTO> userReviewDTOList = new ArrayList<>();
        for(UserReview userReview: userReviewList){
            UserDTO userDTO= getUserDetails(userReview.getUserId());
            RestaurantDTO restaurantDTO=getRestaurantDetails(userReview.getRestaurantId());
@@ -79,6 +80,7 @@ public class UserReviewControllerContractImpl implements UserReviewControllerCon
     public UserReviewDTO updateByReviewText(UserReviewUpdateTextRequest userReviewUpdateTextRequest) {
         UserReview userReview=checkUserReview(userReviewUpdateTextRequest.id());
         UserReviewMapper.INSTANCE.updateText(userReview, userReviewUpdateTextRequest);
+        this.userReviewEntityService.save(userReview);
         UserDTO userDTO= getUserDetails(userReview.getUserId());
         RestaurantDTO restaurantDTO=getRestaurantDetails(userReview.getRestaurantId());
         return UserReviewMapper.INSTANCE.convertToDTO(userReview,userDTO,restaurantDTO);

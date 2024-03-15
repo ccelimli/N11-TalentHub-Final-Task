@@ -7,19 +7,28 @@ package org.n11.entity.enums;
  * @author Çağatay Çelimli
  */
 public enum Rate {
-    ONE("1"),
-    TWO("2"),
-    THREE("3"),
-    FOUR("4"),
-    FIVE("5");
+    ONE(1),
+    TWO(2),
+    THREE(3),
+    FOUR(4),
+    FIVE(5);
 
-    private String context;
+    private final int value;
 
-    Rate(String context) {
-        this.context = context;
+    Rate(int value) {
+        this.value = value;
     }
 
-    public String getContext() {
-        return context;
+    public int getValue() {
+        return value;
+    }
+
+    public static Rate fromValue(int value) {
+        for (Rate rate : Rate.values()) {
+            if (rate.getValue() == value) {
+                return rate;
+            }
+        }
+        throw new IllegalArgumentException("Invalid rate value: " + value);
     }
 }

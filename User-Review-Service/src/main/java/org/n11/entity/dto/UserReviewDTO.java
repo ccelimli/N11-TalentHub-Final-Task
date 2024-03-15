@@ -14,7 +14,7 @@ public record UserReviewDTO(
         String fullName,
         String restaurantName,
         String reviewText,
-        Rate rate,
+        Integer rate,
         LocalDate reviewDate
 ) {
 }

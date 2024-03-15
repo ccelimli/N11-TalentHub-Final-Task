@@ -10,6 +10,6 @@ import org.n11.entity.enums.Rate;
  */
 public record UserReviewUpdateTextRequest(
         Long id,
-        Rate rate,
+        Integer rate,
         String reviewText) {
 }

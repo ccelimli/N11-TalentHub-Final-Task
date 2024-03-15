@@ -135,7 +135,7 @@ public class UserReviewController {
 
     @Operation(
             description = " Find with Restaurant Id in User Reviews",
-            summary = "Find By Id",
+            summary = "Find By Restaurant Id",
             requestBody =@io.swagger.v3.oas.annotations.parameters.RequestBody(
                     description = "Restaurant Id",
                     content = @Content(

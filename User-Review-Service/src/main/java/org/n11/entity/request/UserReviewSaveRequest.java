@@ -14,6 +14,5 @@ public record UserReviewSaveRequest(
         Long userId,
         String restaurantId,
         String reviewText,
-        Rate rate,
-        LocalDate reviewDate) {
+        Integer rate) {
 }
