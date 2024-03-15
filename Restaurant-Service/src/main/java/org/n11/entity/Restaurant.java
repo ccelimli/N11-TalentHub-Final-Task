@@ -4,7 +4,6 @@ package org.n11.entity;
 import lombok.Getter;
 import lombok.Setter;
 import org.n11.entity.enums.Activity;
-import org.n11.utilities.general.entity.BaseEntity;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.solr.core.mapping.Indexed;
 import org.springframework.data.solr.core.mapping.SolrDocument;
@@ -18,9 +17,9 @@ import java.util.UUID;
  *
  * @author Çağatay Çelimli
  */
-@SolrDocument(solrCoreName = "restaurants")
 @Getter
 @Setter
+@SolrDocument(solrCoreName = "n11_restaurants")
 public class Restaurant {
 
     @Id
@@ -69,4 +68,6 @@ public class Restaurant {
         this.latitude = latitude;
         this.longitude = longitude;
     }
+
+
 }

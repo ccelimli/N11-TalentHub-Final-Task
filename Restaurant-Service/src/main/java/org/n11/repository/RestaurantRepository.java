@@ -5,6 +5,7 @@ import org.n11.entity.enums.Activity;
 import org.springframework.data.solr.repository.Query;
 import org.springframework.data.solr.repository.SolrCrudRepository;
 
+
 import java.util.List;
 
 

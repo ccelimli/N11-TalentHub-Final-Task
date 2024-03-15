@@ -1,5 +1,6 @@
 package org.n11.entity.request;
 
+import java.sql.Timestamp;
 import java.time.LocalTime;
 
 /**

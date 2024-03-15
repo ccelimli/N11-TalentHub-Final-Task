@@ -70,7 +70,8 @@ public class RestaurantControllerContactImpl implements RestaurantControllerCont
     @Override
     public RestaurantDTO findById(String id) {
         Restaurant restaurant= findByRestaurant(id);
-        return RestaurantMapper.INSTANCE.convertToDTO(restaurant);
+        RestaurantDTO restaurantDTO = RestaurantMapper.INSTANCE.convertToDTO(restaurant);
+        return restaurantDTO.withStatus(getRestaurantStatus(restaurantDTO.openingTime(), restaurantDTO.closingTime()));
     }
 
     @Override

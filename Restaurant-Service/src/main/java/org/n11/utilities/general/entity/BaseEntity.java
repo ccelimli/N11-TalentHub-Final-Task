@@ -1,6 +1,7 @@
 package org.n11.utilities.general.entity;
 
 
+
 import jakarta.persistence.Embedded;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;

@@ -23,7 +23,7 @@ import java.util.List;
  * @author Çağatay Çelimli
  */
 @RestController
-@RequestMapping("/api/v1/restaurants")
+@RequestMapping("api/v1/restaurants")
 @Tag(name = "Restaurant Controller", description = "Restaurant Management")
 public class RestaurantController {
     private final RestaurantControllerContact restaurantControllerContact;
@@ -148,7 +148,7 @@ public class RestaurantController {
             )
     )
     @GetMapping
-    public ResponseEntity<RestResponse<List<RestaurantDTO>>> findAll(){
+    public ResponseEntity<RestResponse<Iterable<RestaurantDTO>>> findAll(){
         return ResponseEntity.ok(RestResponse.of(this.restaurantControllerContact.findAllRestaurants()));
     }
 
@@ -158,10 +158,7 @@ public class RestaurantController {
             requestBody =@io.swagger.v3.oas.annotations.parameters.RequestBody(
                     description = "Restaurant Id",
                     content = @Content(
-                            mediaType = "application/json",
-                            schema = @Schema(
-                                    implementation = RestaurantDTO.class
-                            )
+                            mediaType = "application/json"
                     )
             )
     )
