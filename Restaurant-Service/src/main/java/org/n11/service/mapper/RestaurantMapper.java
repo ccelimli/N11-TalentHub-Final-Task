@@ -29,5 +29,6 @@ public interface RestaurantMapper {
 
     List<RestaurantDTO> convertToDTOS(List<Restaurant> restaurant);
 
+    @Mapping(target = "id", ignore = true)
     Restaurant convertTOUpdate(@MappingTarget Restaurant restaurant, RestaurantUpdateRequest restaurantUpdateRequest);
 }

@@ -24,6 +24,6 @@ public interface RestaurantEntityService {
     Iterable<Restaurant> findAllRestaurants();
     Restaurant findById(String id);
     Restaurant changeToActivity(Restaurant restaurant);
-    List<Restaurant> findByActivity(Activity activity);
+    List<Restaurant> findByActivity(String name);
 
 }

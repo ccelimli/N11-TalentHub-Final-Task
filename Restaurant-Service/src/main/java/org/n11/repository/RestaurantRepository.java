@@ -16,6 +16,6 @@ import java.util.List;
  * @author Çağatay Çelimli
  */
 public interface RestaurantRepository extends SolrCrudRepository<Restaurant, String> {
-    @Query
-    List<Restaurant> findByActivity(Activity activity);
+    @Query(name="Restaurant.findByActive")
+    List<Restaurant> findByName(String name);
 }

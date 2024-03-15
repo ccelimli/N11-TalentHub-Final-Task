@@ -19,9 +19,9 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Copyright (c) 2024
@@ -53,6 +53,7 @@ public class RestaurantControllerContactImpl implements RestaurantControllerCont
     public RestaurantDTO updateRestaurant(RestaurantUpdateRequest restaurantUpdateRequest) {
         Restaurant restaurant=findByRestaurant(restaurantUpdateRequest.id());
         Restaurant updateRestaurant=RestaurantMapper.INSTANCE.convertTOUpdate(restaurant,restaurantUpdateRequest);
+        this.restaurantEntityService.updateRestaurant(updateRestaurant);
         RestaurantDTO restaurantDTO= RestaurantMapper.INSTANCE.convertToDTO(updateRestaurant);
         return restaurantDTO.withStatus(getRestaurantStatus(restaurantDTO.openingTime(), restaurantDTO.closingTime()));    }
 
@@ -65,7 +66,7 @@ public class RestaurantControllerContactImpl implements RestaurantControllerCont
             restaurantDTO = restaurantDTO.withStatus(getRestaurantStatus(restaurantDTO.openingTime(), restaurantDTO.closingTime()));
             restaurantDTOS.add(restaurantDTO);
         }
-        return restaurantDTOS;
+        return restaurantDTOS.stream().filter(restaurantDTO -> restaurantDTO.activity()==Activity.ACTIVE).collect(Collectors.toList());
     }
 
     @Override
@@ -79,12 +80,13 @@ public class RestaurantControllerContactImpl implements RestaurantControllerCont
     public RestaurantDTO changeToActivity(RestaurantUpdateActivityRequest restaurantUpdateActivityRequest) {
         Restaurant restaurant= findByRestaurant(restaurantUpdateActivityRequest.id());
         restaurant.setActivity(restaurantUpdateActivityRequest.activity());
+        this.restaurantEntityService.save(restaurant);
         return RestaurantMapper.INSTANCE.convertToDTO(restaurant);
     }
 
     @Override
-    public List<RestaurantDTO> findByActivities(Activity activity) {
-        List<Restaurant> restaurantList= this.restaurantEntityService.findByActivity(activity);
+    public List<RestaurantDTO> findByName(String name) {
+        List<Restaurant> restaurantList= this.restaurantEntityService.findByActivity(name);
         if (restaurantList.isEmpty()){
             throw new ItemNotFoundException(ErrorMessages.EMPTY_LIST);
         }

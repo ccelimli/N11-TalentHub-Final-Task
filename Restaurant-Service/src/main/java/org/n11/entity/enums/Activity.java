@@ -8,7 +8,7 @@ package org.n11.entity.enums;
  */
 public enum Activity {
     ACTIVE("ACTIVE"),
-    NOT_ACTIVE("NOT ACTIVE");
+    DEACTIVE("DEACTIVE");
 
     private String context;
 

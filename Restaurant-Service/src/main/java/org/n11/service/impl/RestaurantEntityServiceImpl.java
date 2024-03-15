@@ -56,7 +56,7 @@ public class RestaurantEntityServiceImpl implements RestaurantEntityService {
     }
 
     @Override
-    public List<Restaurant> findByActivity(Activity activity) {
-        return this.restaurantRepository.findByActivity(activity);
+    public List<Restaurant> findByActivity(String name) {
+        return this.restaurantRepository.findByName(name);
     }
 }

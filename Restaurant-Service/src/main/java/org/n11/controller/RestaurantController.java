@@ -185,4 +185,9 @@ public class RestaurantController {
     public ResponseEntity<RestResponse<RestaurantDTO>> changeToActivity(@PathVariable String id, @RequestBody RestaurantUpdateActivityRequest restaurantUpdateActivityRequest) {
         return ResponseEntity.ok(RestResponse.of(this.restaurantControllerContact.changeToActivity(restaurantUpdateActivityRequest)));
     }
+
+    @GetMapping("/with-restaurants/{name}")
+    public ResponseEntity<RestResponse<List<RestaurantDTO>>> findByName(@PathVariable String name){
+        return ResponseEntity.ok(RestResponse.of(this.restaurantControllerContact.findByName(name)));
+    }
 }

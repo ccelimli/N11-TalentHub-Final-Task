@@ -24,5 +24,5 @@ public interface RestaurantControllerContact {
     Iterable<RestaurantDTO> findAllRestaurants();
     RestaurantDTO findById(String id);
     RestaurantDTO changeToActivity(RestaurantUpdateActivityRequest restaurantUpdateActivityRequest);
-    List<RestaurantDTO> findByActivities(Activity activity);
+    List<RestaurantDTO> findByName(String name);
 }
