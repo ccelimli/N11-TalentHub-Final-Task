@@ -1,6 +1,6 @@
 package org.n11.controller.contract;
 
-import org.n11.entity.dto.SuggestRestaurantDTO;
+import org.n11.entity.dto.RestaurantDTO;
 
 import java.util.List;
 
@@ -11,5 +11,6 @@ import java.util.List;
  * @author Çağatay Çelimli
  */
 public interface SuggestRestaurantControllerContract {
-    List<SuggestRestaurantDTO> suggestRestaurants(Long userId);
+    List<RestaurantDTO> suggestRestaurants(Long userId);
+    List<RestaurantDTO> getAllRestaurants();
 }

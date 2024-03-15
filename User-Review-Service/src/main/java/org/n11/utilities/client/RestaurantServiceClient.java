@@ -7,6 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.List;
+
 /**
  * Copyright (c) 2024
  * All rights reserved.
@@ -17,4 +19,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface RestaurantServiceClient {
     @GetMapping("/{restaurantId}")
     ResponseEntity<RestResponse<RestaurantDTO>> getRestaurantById(@PathVariable("restaurantId") String restaurantId);
+    @GetMapping
+    ResponseEntity<RestResponse<List<RestaurantDTO>>> getAllRestaurants();
 }

@@ -9,15 +9,19 @@ import java.time.LocalTime;
  * @author Çağatay Çelimli
  */
 public record RestaurantDTO(
+        String id,
         String name,
         String phoneNumber,
         String address,
         String website,
         LocalTime openingTime,
         LocalTime closingTime,
-        Double latitude,
-        Double longitude,
         String status,
-        Double averageDTO
+        Double average,
+        Double latitude,
+        Double longitude
 ) {
+    public RestaurantDTO withAverage(Double average) {
+        return new RestaurantDTO( id,name, phoneNumber, address, website, openingTime,closingTime,status, average,latitude,longitude);
+    }
 }

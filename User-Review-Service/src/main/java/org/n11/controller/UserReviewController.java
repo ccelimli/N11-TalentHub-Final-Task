@@ -144,7 +144,7 @@ public class UserReviewController {
             )
     )
     @GetMapping("/with-restaurants/{id}")
-    public ResponseEntity<RestResponse<List<UserReviewDTO>>> findByRestaurant(String id){
+    public ResponseEntity<RestResponse<List<UserReviewDTO>>> findByRestaurant(@PathVariable String id){
         return ResponseEntity.ok(RestResponse.of(this.userReviewControllerContract.findByResturantId(id)));
     }
 }

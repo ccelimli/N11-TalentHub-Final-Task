@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.n11.constant.ErrorMessages;
 import org.n11.constant.Messages;
 import org.n11.controller.contract.UserReviewControllerContract;
+import org.n11.controller.contract.impl.helper.clientHelper.RestaurantClientHelper;
+import org.n11.controller.contract.impl.helper.clientHelper.UserClientHelper;
 import org.n11.entity.UserReview;
 import org.n11.entity.dto.RestaurantDTO;
 import org.n11.entity.dto.UserDTO;
@@ -12,17 +14,13 @@ import org.n11.entity.request.UserReviewSaveRequest;
 import org.n11.entity.request.UserReviewUpdateTextRequest;
 import org.n11.service.UserReviewEntityService;
 import org.n11.service.mapper.UserReviewMapper;
-import org.n11.utilities.client.RestaurantServiceClient;
-import org.n11.utilities.client.UserServiceClient;
 import org.n11.utilities.exceptions.ItemNotFoundException;
-import org.n11.utilities.general.entity.RestResponse;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.List;
+
+
 
 /**
  * Copyright (c) 2024
@@ -34,23 +32,23 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserReviewControllerContractImpl implements UserReviewControllerContract{
     private final UserReviewEntityService userReviewEntityService;
-    private final UserServiceClient userServiceClient;
-    private final RestaurantServiceClient restaurantServiceClient;
+    private final RestaurantClientHelper restaurantClientHelper;
+    private final UserClientHelper userClientHelper;
 
     @Override
     public UserReviewDTO save(UserReviewSaveRequest userReviewSaveRequest) {
         UserReview userReview= UserReviewMapper.INSTANCE.convertToEntity(userReviewSaveRequest);
         this.userReviewEntityService.save(userReview);
-        UserDTO userDTO= getUserDetails(userReview.getUserId());
-        RestaurantDTO restaurantDTO=getRestaurantDetails(userReview.getRestaurantId());
+        UserDTO userDTO= userClientHelper.getUserDetails(userReview.getUserId());
+        RestaurantDTO restaurantDTO= restaurantClientHelper.getRestaurantDetails(userReview.getRestaurantId());
         return UserReviewMapper.INSTANCE.convertToDTO(userReview,userDTO,restaurantDTO);
     }
 
     @Override
     public UserReviewDTO findById(Long id) {
         UserReview userReview = checkUserReview(id);
-        UserDTO userDTO= getUserDetails(userReview.getUserId());
-        RestaurantDTO restaurantDTO=getRestaurantDetails(userReview.getRestaurantId());
+        UserDTO userDTO= userClientHelper.getUserDetails(userReview.getUserId());
+        RestaurantDTO restaurantDTO= restaurantClientHelper.getRestaurantDetails(userReview.getRestaurantId());
         return UserReviewMapper.INSTANCE.convertToDTO(userReview,userDTO,restaurantDTO);
     }
 
@@ -59,8 +57,8 @@ public class UserReviewControllerContractImpl implements UserReviewControllerCon
        List<UserReview> userReviewList= this.userReviewEntityService.findAll();
        List<UserReviewDTO> userReviewDTOList = new ArrayList<>();
        for(UserReview userReview: userReviewList){
-           UserDTO userDTO= getUserDetails(userReview.getUserId());
-           RestaurantDTO restaurantDTO=getRestaurantDetails(userReview.getRestaurantId());
+           UserDTO userDTO= userClientHelper.getUserDetails(userReview.getUserId());
+           RestaurantDTO restaurantDTO= restaurantClientHelper.getRestaurantDetails(userReview.getRestaurantId());
            UserReviewDTO userReviewDTO=UserReviewMapper.INSTANCE.convertToDTO(userReview,userDTO,restaurantDTO);
            userReviewDTOList.add(userReviewDTO);
        }
@@ -81,18 +79,18 @@ public class UserReviewControllerContractImpl implements UserReviewControllerCon
         UserReview userReview=checkUserReview(userReviewUpdateTextRequest.id());
         UserReviewMapper.INSTANCE.updateText(userReview, userReviewUpdateTextRequest);
         this.userReviewEntityService.save(userReview);
-        UserDTO userDTO= getUserDetails(userReview.getUserId());
-        RestaurantDTO restaurantDTO=getRestaurantDetails(userReview.getRestaurantId());
+        UserDTO userDTO= userClientHelper.getUserDetails(userReview.getUserId());
+        RestaurantDTO restaurantDTO= restaurantClientHelper.getRestaurantDetails(userReview.getRestaurantId());
         return UserReviewMapper.INSTANCE.convertToDTO(userReview,userDTO,restaurantDTO);
     }
 
     @Override
     public List<UserReviewDTO> findByResturantId(String id){
         List<UserReview> userReviewList=this.userReviewEntityService.findByRestaurantIdUserReviews(id);
-        List<UserReviewDTO> userReviewDTOList=null;
+        List<UserReviewDTO> userReviewDTOList=new ArrayList<>();
         for(UserReview userReview: userReviewList){
-            UserDTO userDTO= getUserDetails(userReview.getUserId());
-            RestaurantDTO restaurantDTO=getRestaurantDetails(userReview.getRestaurantId());
+            UserDTO userDTO= userClientHelper.getUserDetails(userReview.getUserId());
+            RestaurantDTO restaurantDTO= restaurantClientHelper.getRestaurantDetails(userReview.getRestaurantId());
             UserReviewDTO userReviewDTO=UserReviewMapper.INSTANCE.convertToDTO(userReview,userDTO,restaurantDTO);
             userReviewDTOList.add(userReviewDTO);
         }
@@ -107,15 +105,5 @@ public class UserReviewControllerContractImpl implements UserReviewControllerCon
         else{
             return userReview;
         }
-    }
-
-    private UserDTO getUserDetails(Long userId) {
-        ResponseEntity<RestResponse<UserDTO>> userServiceResponse = userServiceClient.getUserById(userId);
-        return userServiceResponse.getBody().getData();
-    }
-
-    private RestaurantDTO getRestaurantDetails(String restaurantId) {
-        ResponseEntity<RestResponse<RestaurantDTO>> restaurantServiceResponse = restaurantServiceClient.getRestaurantById(restaurantId);
-        return restaurantServiceResponse.getBody().getData();
     }
 }
