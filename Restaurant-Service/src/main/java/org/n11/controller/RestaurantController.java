@@ -36,7 +36,7 @@ public class RestaurantController {
     @Operation(
             description = "New Create Restaurant",
             summary = "Create A New Restaurant",
-            requestBody =@io.swagger.v3.oas.annotations.parameters.RequestBody(
+            requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
                     description = "Restaurant Infos",
                     content = @Content(
                             mediaType = "application/json",
@@ -48,38 +48,28 @@ public class RestaurantController {
                                             name = "New Restaurant",
                                             summary = "New",
                                             description = "Complete request with all available fields for a new restaurant",
-                                            value = "{\"name\":\"Josephina\",\n" +
-                                                    " \"phoneNumber\":\"+905555555555\",\n" +
-                                                    " \"address\":\"49 Northwestern Way\",\n" +
-                                                    " \"website\":\"www.website.com\",\n" +
-                                                    " \"openingTime\":{\n" +
-                                                    "     \"hour\":12,\n" +
-                                                    "     \"minute\":30,\n" +
-                                                    "     \"second\":0,\n" +
-                                                    "     \"nano\":0\n" +
-                                                    " },\n" +
-                                                    " \"closingTime\":{\n" +
-                                                    "     \"hour\":23,\n" +
-                                                    "     \"minute\":0,\n" +
-                                                    "     \"second\":0,\n" +
-                                                    "     \"nano\":0\n" +
-                                                    " },\n" +
-                                                    " \"latitude\":37.6854422,\n" +
-                                                    " \"longitude\":48.3412639\n" +
-                                                    "}"
+                                            value = "{\"name\":\"Tonia Mesant\",\n" +
+                                                    " \"phoneNumber\":\"211-590-5898\",\n" +
+                                                    " \"address\":\"10 West Junction\",\n" +
+                                                    " \"website\":\"http://vistaprint.com/\",\n" +
+                                                    " \"openingTime\":\"10:20\",\n" +
+                                                    " \"closingTime\":\"02:30\",\n" +
+                                                    " \"latitude\":30.7058907,\n" +
+                                                    " \"longitude\":76.785812}"
                                     )
                             }
                     )
             )
-    )
+)
     @PostMapping
-    public ResponseEntity<RestResponse<RestaurantDTO>> save(@RequestBody RestaurantSaveRequest restaurantSaveRequest){
+    public ResponseEntity<RestResponse<RestaurantDTO>> save(@RequestBody RestaurantSaveRequest restaurantSaveRequest) {
         return ResponseEntity.ok(RestResponse.of(this.restaurantControllerContact.save(restaurantSaveRequest)));
     }
+
     @Operation(
             description = " Delete By Id A Restaurant",
             summary = "Delete A Restaurants",
-            requestBody =@io.swagger.v3.oas.annotations.parameters.RequestBody(
+            requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
                     description = "User Id",
                     content = @Content(
                             mediaType = "application/json"
@@ -87,14 +77,14 @@ public class RestaurantController {
             )
     )
     @DeleteMapping("/{id}")
-    public ResponseEntity<RestResponse<String>> delete(@PathVariable String id){
+    public ResponseEntity<RestResponse<String>> delete(@PathVariable String id) {
         return ResponseEntity.ok(RestResponse.of(this.restaurantControllerContact.deleteRestaurant(id)));
     }
 
     @Operation(
             description = "New Create Restaurant",
             summary = "Create A New Restaurant",
-            requestBody =@io.swagger.v3.oas.annotations.parameters.RequestBody(
+            requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
                     description = "Restaurant Infos",
                     content = @Content(
                             mediaType = "application/json",
@@ -133,14 +123,14 @@ public class RestaurantController {
             )
     )
     @PutMapping("/{id}")
-    public ResponseEntity<RestResponse<RestaurantDTO>> update(@PathVariable String id,@RequestBody RestaurantUpdateRequest restaurantUpdateRequest){
+    public ResponseEntity<RestResponse<RestaurantDTO>> update(@PathVariable String id, @RequestBody RestaurantUpdateRequest restaurantUpdateRequest) {
         return ResponseEntity.ok(RestResponse.of(this.restaurantControllerContact.updateRestaurant(restaurantUpdateRequest)));
     }
 
     @Operation(
             description = "Find All Recorded Restaurants",
             summary = "Find All",
-            requestBody =@io.swagger.v3.oas.annotations.parameters.RequestBody(
+            requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
                     description = "Restaurants Infos",
                     content = @Content(
                             mediaType = "application/json"
@@ -148,14 +138,14 @@ public class RestaurantController {
             )
     )
     @GetMapping
-    public ResponseEntity<RestResponse<Iterable<RestaurantDTO>>> findAll(){
+    public ResponseEntity<RestResponse<Iterable<RestaurantDTO>>> findAll() {
         return ResponseEntity.ok(RestResponse.of(this.restaurantControllerContact.findAllRestaurants()));
     }
 
     @Operation(
             description = " Find with Id a Restaurant",
             summary = "Find By Id",
-            requestBody =@io.swagger.v3.oas.annotations.parameters.RequestBody(
+            requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
                     description = "Restaurant Id",
                     content = @Content(
                             mediaType = "application/json"
@@ -163,14 +153,14 @@ public class RestaurantController {
             )
     )
     @GetMapping("/{id}")
-    public ResponseEntity<RestResponse<RestaurantDTO>> findById(@PathVariable String id){
+    public ResponseEntity<RestResponse<RestaurantDTO>> findById(@PathVariable String id) {
         return ResponseEntity.ok(RestResponse.of(this.restaurantControllerContact.findById(id)));
     }
 
     @Operation(
             description = "Change Activity of Recorded Restaurant",
             summary = "Change To Activity",
-            requestBody =@io.swagger.v3.oas.annotations.parameters.RequestBody(
+            requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
                     description = "Restaurant Id and Restaurant Activity",
                     content = @Content(
                             mediaType = "application/json",
@@ -192,7 +182,7 @@ public class RestaurantController {
             )
     )
     @PatchMapping("/{id}")
-    public ResponseEntity<RestResponse<RestaurantDTO>> changeToActivity(@PathVariable String id,@RequestBody RestaurantUpdateActivityRequest restaurantUpdateActivityRequest){
+    public ResponseEntity<RestResponse<RestaurantDTO>> changeToActivity(@PathVariable String id, @RequestBody RestaurantUpdateActivityRequest restaurantUpdateActivityRequest) {
         return ResponseEntity.ok(RestResponse.of(this.restaurantControllerContact.changeToActivity(restaurantUpdateActivityRequest)));
     }
 }

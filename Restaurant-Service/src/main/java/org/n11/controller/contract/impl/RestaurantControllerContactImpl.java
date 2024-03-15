@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -94,10 +95,18 @@ public class RestaurantControllerContactImpl implements RestaurantControllerCont
         LocalDateTime now = LocalDateTime.now(ZoneId.systemDefault());
         LocalTime currentTime = now.toLocalTime();
 
-        if (currentTime.isAfter(openingTime) && currentTime.isBefore(closingTime)) {
-            return Status.OPEN;
+        if (closingTime.isBefore(openingTime)) {
+            if (currentTime.isAfter(openingTime) || currentTime.isBefore(closingTime)) {
+                return Status.OPEN;
+            } else {
+                return Status.CLOSE;
+            }
         } else {
-            return Status.CLOSE;
+            if (currentTime.isAfter(openingTime) && currentTime.isBefore(closingTime)) {
+                return Status.OPEN;
+            } else {
+                return Status.CLOSE;
+            }
         }
     }
 
