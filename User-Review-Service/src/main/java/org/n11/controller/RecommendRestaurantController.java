@@ -4,10 +4,9 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
-import org.n11.controller.contract.SuggestRestaurantControllerContract;
+import org.n11.controller.contract.RecommendRestaurantControllerContract;
 import org.n11.entity.dto.RestaurantDTO;
-import org.n11.entity.request.SuggestRestaurantRequest;
-import org.n11.entity.request.UserReviewUpdateTextRequest;
+import org.n11.entity.request.RecommendRestaurantRequest;
 import org.n11.utilities.general.entity.RestResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,11 +23,11 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/api/v1/user-reviews/restaurants")
-public class SuggestRestaurantController {
-    private final SuggestRestaurantControllerContract suggestRestaurantControllerContract;
+public class RecommendRestaurantController {
+    private final RecommendRestaurantControllerContract recommendRestaurantControllerContract;
 
-    public SuggestRestaurantController(SuggestRestaurantControllerContract suggestRestaurantControllerContract) {
-        this.suggestRestaurantControllerContract = suggestRestaurantControllerContract;
+    public RecommendRestaurantController(RecommendRestaurantControllerContract recommendRestaurantControllerContract) {
+        this.recommendRestaurantControllerContract = recommendRestaurantControllerContract;
     }
 
     @Operation(
@@ -43,7 +42,7 @@ public class SuggestRestaurantController {
     )
     @GetMapping
     public ResponseEntity<RestResponse<List<RestaurantDTO>>> getAllRestaurants(){
-        return ResponseEntity.ok(RestResponse.of(this.suggestRestaurantControllerContract.getAllRestaurants()));
+        return ResponseEntity.ok(RestResponse.of(this.recommendRestaurantControllerContract.getAllRestaurants()));
     }
 
     @Operation(
@@ -54,7 +53,7 @@ public class SuggestRestaurantController {
                     content = @Content(
                             mediaType = "application/json",
                             schema = @Schema(
-                                    implementation = SuggestRestaurantRequest.class
+                                    implementation = RecommendRestaurantRequest.class
                             ),
                             examples = {
                                     @ExampleObject(
@@ -71,7 +70,7 @@ public class SuggestRestaurantController {
             )
     )
     @GetMapping("/with-suggest-restaurant")
-    public ResponseEntity<RestResponse<List<RestaurantDTO>>> suggestRestaurants(SuggestRestaurantRequest suggestRestaurantRequest){
-        return ResponseEntity.ok(RestResponse.of(this.suggestRestaurantControllerContract.suggestRestaurants(suggestRestaurantRequest)));
+    public ResponseEntity<RestResponse<List<RestaurantDTO>>> suggestRestaurants(RecommendRestaurantRequest recommendRestaurantRequest){
+        return ResponseEntity.ok(RestResponse.of(this.recommendRestaurantControllerContract.suggestRestaurants(recommendRestaurantRequest)));
     }
 }

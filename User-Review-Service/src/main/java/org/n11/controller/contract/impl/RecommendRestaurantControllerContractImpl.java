@@ -1,20 +1,17 @@
 package org.n11.controller.contract.impl;
 
 import lombok.RequiredArgsConstructor;
-import org.n11.controller.contract.SuggestRestaurantControllerContract;
+import org.n11.controller.contract.RecommendRestaurantControllerContract;
 import org.n11.controller.contract.UserReviewControllerContract;
 import org.n11.controller.contract.impl.helper.Algorithm;
 import org.n11.controller.contract.impl.helper.clientHelper.RestaurantClientHelper;
 import org.n11.controller.contract.impl.helper.clientHelper.UserClientHelper;
-import org.n11.entity.UserReview;
 import org.n11.entity.dto.RestaurantDTO;
 import org.n11.entity.dto.UserDTO;
 import org.n11.entity.dto.UserReviewDTO;
-import org.n11.entity.request.SuggestRestaurantRequest;
-import org.n11.service.UserReviewEntityService;
+import org.n11.entity.request.RecommendRestaurantRequest;
 import org.springframework.stereotype.Service;
 
-import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,12 +25,12 @@ import java.util.Locale;
  */
 @Service
 @RequiredArgsConstructor
-public class SuggestRestaurantControllerContractImpl implements SuggestRestaurantControllerContract {
+public class RecommendRestaurantControllerContractImpl implements RecommendRestaurantControllerContract {
     private final UserReviewControllerContract userReviewControllerContract;
     private final RestaurantClientHelper restaurantClientHelper;
     private final UserClientHelper userClientHelper;
     @Override
-    public List<RestaurantDTO> suggestRestaurants(SuggestRestaurantRequest suggestRestaurantRequest) {
+    public List<RestaurantDTO> suggestRestaurants(RecommendRestaurantRequest recommendRestaurantRequest) {
         List<RestaurantDTO> restaurantDTOS=this.restaurantClientHelper.getAllRestaurant();
         List<RestaurantDTO> restaurantDTOList = new ArrayList<>();
         NumberFormat nf = NumberFormat.getNumberInstance(Locale.US);
@@ -50,8 +47,8 @@ public class SuggestRestaurantControllerContractImpl implements SuggestRestauran
 
             restaurantDTOList.add(restaurantDTO);
         }
-        UserDTO userDTO=userClientHelper.getUserDetails(suggestRestaurantRequest.userId());
-        return Algorithm.recommendRestaurants(userDTO,suggestRestaurantRequest.maxDistance(),restaurantDTOList);
+        UserDTO userDTO=userClientHelper.getUserDetails(recommendRestaurantRequest.userId());
+        return Algorithm.recommendRestaurants(userDTO, recommendRestaurantRequest.maxDistance(),restaurantDTOList);
     }
 
     @Override
