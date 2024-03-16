@@ -102,18 +102,8 @@ public class RestaurantController {
                                                     " \"phoneNumber\":\"+905555555555\",\n" +
                                                     " \"address\":\"49 Northwestern Way\",\n" +
                                                     " \"website\":\"www.website.com\",\n" +
-                                                    " \"openingTime\":{\n" +
-                                                    "     \"hour\":12,\n" +
-                                                    "     \"minute\":30,\n" +
-                                                    "     \"second\":0,\n" +
-                                                    "     \"nano\":0\n" +
-                                                    " },\n" +
-                                                    " \"closingTime\":{\n" +
-                                                    "     \"hour\":23,\n" +
-                                                    "     \"minute\":0,\n" +
-                                                    "     \"second\":0,\n" +
-                                                    "     \"nano\":0\n" +
-                                                    " },\n" +
+                                                    " \"openingTime\":\"08:30\",\n" +
+                                                    " \"closingTime\": \"23:30\",\n" +
                                                     " \"latitude\":37.6854422,\n" +
                                                     " \"longitude\":48.3412639\n" +
                                                     "}"

@@ -2,6 +2,8 @@ package org.n11.entity.request;
 
 import org.n11.entity.enums.Activity;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * Copyright (c) 2024
  * All rights reserved.
@@ -9,8 +11,7 @@ import org.n11.entity.enums.Activity;
  * @author Çağatay Çelimli
  */
 public record RestaurantUpdateActivityRequest (
-        String id,
-        Activity activity
-
+        @NotNull String id,
+        @NotNull Activity activity
 ){
 }

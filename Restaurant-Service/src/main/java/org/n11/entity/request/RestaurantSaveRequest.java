@@ -1,5 +1,6 @@
 package org.n11.entity.request;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalTime;
 
 /**
@@ -8,12 +9,12 @@ import java.time.LocalTime;
  *
  * @author Çağatay Çelimli
  */
-public record RestaurantSaveRequest(String name,
-                                    String phoneNumber,
-                                    String address,
-                                    String website,
-                                    LocalTime openingTime,
-                                    LocalTime closingTime,
-                                    Double latitude,
-                                    Double longitude) {
+public record RestaurantSaveRequest(@NotNull String name,
+                                    @NotNull String phoneNumber,
+                                    @NotNull String address,
+                                    @NotNull String website,
+                                    @NotNull LocalTime openingTime,
+                                    @NotNull LocalTime closingTime,
+                                    @NotNull Double latitude,
+                                    @NotNull Double longitude) {
 }

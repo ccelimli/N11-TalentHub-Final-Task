@@ -33,7 +33,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class RestaurantControllerContactImpl implements RestaurantControllerContact {
     private final RestaurantEntityService restaurantEntityService;
-
     @Override
     public RestaurantDTO save(RestaurantSaveRequest restaurantSaveRequest) {
         Restaurant restaurant = RestaurantMapper.INSTANCE.convertToEntity(restaurantSaveRequest);
@@ -73,7 +72,7 @@ public class RestaurantControllerContactImpl implements RestaurantControllerCont
     public RestaurantDTO findById(String id) {
         Restaurant restaurant= findByRestaurant(id);
         RestaurantDTO restaurantDTO = RestaurantMapper.INSTANCE.convertToDTO(restaurant);
-        return restaurantDTO.withStatus(getRestaurantStatus(restaurantDTO.openingTime(), restaurantDTO.closingTime()));
+        return  restaurantDTO.withStatus(getRestaurantStatus(restaurantDTO.openingTime(), restaurantDTO.closingTime()));
     }
 
     @Override

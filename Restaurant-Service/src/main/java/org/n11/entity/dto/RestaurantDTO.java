@@ -26,6 +26,6 @@ public record RestaurantDTO(
 ) {
 
     public RestaurantDTO withStatus(Status status) {
-        return new RestaurantDTO(id, name, phoneNumber, address, website, openingTime,closingTime, latitude, longitude, status,activity);
+        return new RestaurantDTO(id, name, phoneNumber, address, website, openingTime,closingTime, latitude, longitude,status,activity);
     }
 }
