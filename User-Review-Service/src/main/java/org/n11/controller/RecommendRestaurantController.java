@@ -71,6 +71,6 @@ public class RecommendRestaurantController {
     )
     @GetMapping("/with-suggest-restaurant")
     public ResponseEntity<RestResponse<List<RestaurantDTO>>> suggestRestaurants(RecommendRestaurantRequest recommendRestaurantRequest){
-        return ResponseEntity.ok(RestResponse.of(this.recommendRestaurantControllerContract.suggestRestaurants(recommendRestaurantRequest)));
+        return ResponseEntity.ok(RestResponse.of(this.recommendRestaurantControllerContract.recommendRestaurants(recommendRestaurantRequest)));
     }
 }

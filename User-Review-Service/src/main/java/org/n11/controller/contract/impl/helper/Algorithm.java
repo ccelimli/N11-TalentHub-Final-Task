@@ -24,7 +24,7 @@ public class Algorithm {
             }
         }
 
-        Collections.sort(filteredRestaurants, (r1, r2) -> {
+        filteredRestaurants.sort((r1, r2) -> {
             double score1 = r1.average() * RATING_WEIGHT + (10 - calculateDistance(user.latitude(), user.longitude(), r1.latitude(), r1.longitude())) * DISTANCE_WEIGHT;
             double score2 = r2.average() * RATING_WEIGHT + (10 - calculateDistance(user.latitude(), user.longitude(), r2.latitude(), r2.longitude())) * DISTANCE_WEIGHT;
             return Double.compare(score2, score1);

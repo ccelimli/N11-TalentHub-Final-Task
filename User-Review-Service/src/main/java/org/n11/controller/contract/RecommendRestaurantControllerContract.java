@@ -12,6 +12,6 @@ import java.util.List;
  * @author Çağatay Çelimli
  */
 public interface RecommendRestaurantControllerContract {
-    List<RestaurantDTO> suggestRestaurants(RecommendRestaurantRequest recommendRestaurantRequest);
+    List<RestaurantDTO> recommendRestaurants(RecommendRestaurantRequest recommendRestaurantRequest);
     List<RestaurantDTO> getAllRestaurants();
 }

@@ -16,12 +16,12 @@ import org.n11.entity.request.UserReviewSaveRequest;
 import org.n11.entity.request.UserReviewUpdateTextRequest;
 import org.n11.service.UserReviewEntityService;
 import org.n11.service.mapper.UserReviewMapper;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

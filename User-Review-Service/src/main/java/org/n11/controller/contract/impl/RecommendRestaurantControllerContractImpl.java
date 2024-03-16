@@ -30,7 +30,7 @@ public class RecommendRestaurantControllerContractImpl implements RecommendResta
     private final RestaurantClientHelper restaurantClientHelper;
     private final UserClientHelper userClientHelper;
     @Override
-    public List<RestaurantDTO> suggestRestaurants(RecommendRestaurantRequest recommendRestaurantRequest) {
+    public List<RestaurantDTO> recommendRestaurants(RecommendRestaurantRequest recommendRestaurantRequest) {
         List<RestaurantDTO> restaurantDTOS=this.restaurantClientHelper.getAllRestaurant();
         List<RestaurantDTO> restaurantDTOList = new ArrayList<>();
         NumberFormat nf = NumberFormat.getNumberInstance(Locale.US);
