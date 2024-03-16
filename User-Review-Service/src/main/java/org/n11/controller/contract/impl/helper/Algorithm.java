@@ -33,7 +33,7 @@ public class Algorithm {
         return filteredRestaurants.subList(0, Math.min(3, filteredRestaurants.size()));
     }
 
-    private static double calculateDistance(double userLatitude, double userLongitude, double restaurantLatitude, double restaurantLongitude) {
+    public static double calculateDistance(double userLatitude, double userLongitude, double restaurantLatitude, double restaurantLongitude) {
         final int EARTH_RADIUS_KM = 6371;
 
         double latDistance = Math.toRadians(restaurantLatitude - userLatitude);
