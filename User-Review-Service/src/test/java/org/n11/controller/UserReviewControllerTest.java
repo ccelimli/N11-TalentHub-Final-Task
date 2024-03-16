@@ -97,4 +97,14 @@ public class UserReviewControllerTest extends BaseControllerTest{
         assertTrue(success);
 
     }
+
+    @Test
+    void shouldFindByRestaurantId() throws Exception{
+        MvcResult mvcResult=mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/user-reviews/with-restaurants/24d9e003-aa1c-459e-899c-415999643999"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andReturn();
+
+        boolean success=isSuccess(mvcResult);
+        assertTrue(success);
+    }
 }

@@ -9,9 +9,7 @@ import org.n11.entity.dto.RestaurantDTO;
 import org.n11.entity.request.RecommendRestaurantRequest;
 import org.n11.utilities.general.entity.RestResponse;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,7 +20,7 @@ import java.util.List;
  * @author Çağatay Çelimli
  */
 @RestController
-@RequestMapping("/api/v1/user-reviews/restaurants")
+@RequestMapping("/api/v1/recommend-restaurants")
 public class RecommendRestaurantController {
     private final RecommendRestaurantControllerContract recommendRestaurantControllerContract;
 
@@ -69,8 +67,8 @@ public class RecommendRestaurantController {
                     )
             )
     )
-    @GetMapping("/with-suggest-restaurant")
-    public ResponseEntity<RestResponse<List<RestaurantDTO>>> suggestRestaurants(RecommendRestaurantRequest recommendRestaurantRequest){
+    @GetMapping("/{id}")
+    public ResponseEntity<RestResponse<List<RestaurantDTO>>> recommendRestaurants(@PathVariable Long id, @RequestBody RecommendRestaurantRequest recommendRestaurantRequest){
         return ResponseEntity.ok(RestResponse.of(this.recommendRestaurantControllerContract.recommendRestaurants(recommendRestaurantRequest)));
     }
 }
