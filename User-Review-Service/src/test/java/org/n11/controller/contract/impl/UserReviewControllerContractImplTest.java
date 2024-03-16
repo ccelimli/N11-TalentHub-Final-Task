@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.n11.UserReviewServiceApplication;
 import org.n11.constant.Messages;
 import org.n11.controller.contract.impl.helper.clientHelper.RestaurantClientHelper;
 import org.n11.controller.contract.impl.helper.clientHelper.UserClientHelper;

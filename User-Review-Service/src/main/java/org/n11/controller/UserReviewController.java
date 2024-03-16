@@ -129,7 +129,7 @@ public class UserReviewController {
             )
     )
     @PatchMapping("/{id}")
-    public ResponseEntity<RestResponse<UserReviewDTO>> updateText(UserReviewUpdateTextRequest userReviewUpdateTextRequest) {
+    public ResponseEntity<RestResponse<UserReviewDTO>> updateText(@PathVariable Long id,@RequestBody UserReviewUpdateTextRequest userReviewUpdateTextRequest) {
        return ResponseEntity.ok(RestResponse.of(this.userReviewControllerContract.updateByReviewText(userReviewUpdateTextRequest)));
     }
 
