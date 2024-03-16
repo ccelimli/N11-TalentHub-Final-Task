@@ -48,7 +48,7 @@ public class UserReviewController {
                                             value ="{\"userId\":2,\n" +
                                                    " \"restaurantId\":\"string\",\n" +
                                                    " \"reviewText\":\"This is a review text\",\n" +
-                                                   " \"rate\":\"ONE\",\n" +
+                                                   " \"rate\":\"1\",\n" +
                                                    " \"reviewDate\":\"2024-03-14\"}"
                                     )
                             }

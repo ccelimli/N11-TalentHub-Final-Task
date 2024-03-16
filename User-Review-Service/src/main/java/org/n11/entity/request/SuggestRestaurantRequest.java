@@ -6,7 +6,8 @@ package org.n11.entity.request;
  *
  * @author Çağatay Çelimli
  */
-public class SuggestRestaurantRequest {
-    Long userId;
-    Double maxDistance;
+public record SuggestRestaurantRequest(
+        Long userId,
+        Double maxDistance) {
+
 }
