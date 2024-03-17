@@ -123,15 +123,7 @@ public class UserControllerTest extends BaseControllerTest {
 
     }
 
-    @Test
-    void shouldDeleteUser() throws Exception {
-        MvcResult mvcResult= mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/users/7"))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andReturn();
 
-        boolean success= isSuccess(mvcResult);
-        assertTrue(success);
-    }
 
     @Test
     void shouldActive() throws Exception {

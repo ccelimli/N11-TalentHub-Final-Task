@@ -41,7 +41,7 @@ public class RecommendRestaurantControllerTest extends BaseControllerTest {
 
     @Test
     void shouldGetAllRestaurants() throws Exception {
-        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/user-reviews/restaurants"))
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/recommend-restaurants"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
         boolean success = isSuccess(mvcResult);
@@ -51,10 +51,10 @@ public class RecommendRestaurantControllerTest extends BaseControllerTest {
 
     @Test
     void shouldRecommendRestaurants() throws Exception {
-        RecommendRestaurantRequest recommendRestaurantRequest = new RecommendRestaurantRequest(2L, 10.0);
+        RecommendRestaurantRequest recommendRestaurantRequest = new RecommendRestaurantRequest(1L, 10.0);
         String requestAsString = objectMapper.writeValueAsString(recommendRestaurantRequest);
 
-        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/recommend-restaurants/2")
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/recommend-restaurants/1")
                     .content(requestAsString)
                     .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())

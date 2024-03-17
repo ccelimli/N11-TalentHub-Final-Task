@@ -15,7 +15,7 @@ import java.util.List;
  *
  * @author Çağatay Çelimli
  */
-@FeignClient(value = "restaurant", url = "http://localhost:8082/api/v1/restaurants")
+@FeignClient(value = "restaurant", url = "http://localhost:8087/api/v1/restaurants")
 public interface RestaurantServiceClient {
     @GetMapping("/{restaurantId}")
     ResponseEntity<RestResponse<RestaurantDTO>> getRestaurantById(@PathVariable("restaurantId") String restaurantId);

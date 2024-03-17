@@ -119,6 +119,7 @@ public class UserControllerContractImplTest {
 
         List<User> userList = List.of(firstUser, secondUser);
 
+        // When
         Mockito.when(userEntityService.findAll()).thenReturn(userList);
 
         List<UserDTO> tempUserDTOs = userList.stream()
@@ -126,7 +127,7 @@ public class UserControllerContractImplTest {
                 .map(UserMapper.INSTANCE::convertToDTO)
                 .collect(Collectors.toList());
 
-        // When
+
         List<UserDTO> result = userControllerContractImpl.findAll();
 
         // Then
@@ -143,15 +144,14 @@ public class UserControllerContractImplTest {
         user.setFirstName("John");
         user.setLastName("Doe");
 
-        UserDTO expectedUserDTO = UserMapper.INSTANCE.convertToDTO(user);
-
-        Mockito.when(userEntityService.findByIdWithControl(id)).thenReturn(user);
+        UserDTO tempDTO = UserMapper.INSTANCE.convertToDTO(user);
 
         // When
+        Mockito.when(userEntityService.findByIdWithControl(id)).thenReturn(user);
         UserDTO result = userControllerContractImpl.findById(id);
 
         // Then
-        assertEquals(expectedUserDTO, result);
+        assertEquals(tempDTO, result);
         verify(userEntityService, times(1)).findByIdWithControl(id);
     }
 

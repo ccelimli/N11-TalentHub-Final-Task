@@ -29,15 +29,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 @ExtendWith(MockitoExtension.class)
 @SpringBootTest(classes = {UserReviewServiceApplication.class})
-public class UserReviewControllerTest extends BaseControllerTest{
+public class UserReviewControllerTest extends BaseControllerTest {
     @Autowired
     private WebApplicationContext context;
     private MockMvc mockMvc;
 
     @BeforeEach
-    void setUp(){
-        mockMvc=MockMvcBuilders.webAppContextSetup(this.context).build();
-        objectMapper= new ObjectMapper().registerModule(new JavaTimeModule());
+    void setUp() {
+        mockMvc = MockMvcBuilders.webAppContextSetup(this.context).build();
+        objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
     }
 
     @Test
@@ -51,7 +51,7 @@ public class UserReviewControllerTest extends BaseControllerTest{
 
     @Test
     void shouldGetByIdUserReview() throws Exception{
-        MvcResult mvcResult=mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/user-reviews/252"))
+        MvcResult mvcResult=mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/user-reviews/253"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
         boolean success=isSuccess(mvcResult);
@@ -60,7 +60,7 @@ public class UserReviewControllerTest extends BaseControllerTest{
 
     @Test
     void shouldSaveUserReview() throws Exception{
-        UserReviewSaveRequest userReviewSaveRequest= new UserReviewSaveRequest(2L, "f3cb20bb-ac33-412d-84a7-1a757e2f9174", "Great food!", 5);
+        UserReviewSaveRequest userReviewSaveRequest= new UserReviewSaveRequest(2L, "6753caed-b072-464a-81b3-37e35129dd10", "Great food!", 5);
         String requestAsString= objectMapper.writeValueAsString(userReviewSaveRequest);
 
         MvcResult mvcResult=mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/user-reviews")
@@ -75,7 +75,7 @@ public class UserReviewControllerTest extends BaseControllerTest{
     @Test
     void shouldDeleteUserReview()throws Exception{
 
-        MvcResult mvcResult=mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/user-reviews/252"))
+        MvcResult mvcResult=mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/user-reviews/254"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
         boolean success=isSuccess(mvcResult);
@@ -84,12 +84,12 @@ public class UserReviewControllerTest extends BaseControllerTest{
 
     @Test
     void shouldUpdateText() throws Exception{
-        UserReviewUpdateTextRequest userReviewUpdateTextRequest= new UserReviewUpdateTextRequest(252L,4, "New Context");
+        UserReviewUpdateTextRequest userReviewUpdateTextRequest= new UserReviewUpdateTextRequest(255L,4, "New Context");
 
         String requstAsString=objectMapper.writeValueAsString(userReviewUpdateTextRequest);
-        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.patch("/api/v1/user-reviews/252")
-                    .content(requstAsString)
-                    .contentType(MediaType.APPLICATION_JSON))
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.patch("/api/v1/user-reviews/255")
+                        .content(requstAsString)
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
 

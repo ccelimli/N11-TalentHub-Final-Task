@@ -1,0 +1,53 @@
+version: "3.0"
+
+services:
+  user-service:
+    container_name: user-service-api
+    image: user-service:0.0.1
+    ports:
+      - 8081:8081
+    depends_on:
+      - user-services-db
+    
+  user-review-service:
+    container_name: user-review-service-api
+    image: user-review-service:0.0.1
+    ports:
+      - 8083:8083
+    depends_on:
+      - user-services-db
+
+  restaurant-service:
+    container_name: restaurant-service-api
+    image: restaurant-service:0.0.1
+    ports:
+      - 8082:8082
+    depends_on:
+      - user-services-db
+
+  user-services-db:
+    container_name: user-services-postgres-db
+    image: postgres
+    environment:
+      POSTGRES_DB: TalentHub
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1905
+    ports:
+      - 5433:5432
+    volumes:
+      - user-services-db-data:/var/lib/postgresql/data
+
+  restaurant-db:
+    image: solr:latest
+    container_name: restaurant-solr-db
+    ports:
+      - "8983:8983"
+    volumes:
+      - restaurant-solr-db-data:/var/solr
+    command:
+      - solr-precreate
+      - n11_restaurants
+
+volumes:
+  user-services-db-data:
+  restaurant-solr-db-data:

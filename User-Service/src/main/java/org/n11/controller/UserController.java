@@ -137,10 +137,7 @@ public class UserController {
             requestBody =@io.swagger.v3.oas.annotations.parameters.RequestBody(
                     description = "User Id",
                     content = @Content(
-                            mediaType = "application/json",
-                            schema = @Schema(
-                                    implementation = UserDTO.class
-                            )
+                            mediaType = "application/json"
                     )
             )
     )
