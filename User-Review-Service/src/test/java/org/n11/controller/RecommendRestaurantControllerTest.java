@@ -54,7 +54,7 @@ public class RecommendRestaurantControllerTest extends BaseControllerTest {
         RecommendRestaurantRequest recommendRestaurantRequest = new RecommendRestaurantRequest(1L, 10.0);
         String requestAsString = objectMapper.writeValueAsString(recommendRestaurantRequest);
 
-        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/recommend-restaurants/1")
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/recommend-restaurants/2")
                     .content(requestAsString)
                     .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())

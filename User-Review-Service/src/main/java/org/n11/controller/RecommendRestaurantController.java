@@ -43,31 +43,17 @@ public class RecommendRestaurantController {
         return ResponseEntity.ok(RestResponse.of(this.recommendRestaurantControllerContract.getAllRestaurants()));
     }
 
-    @Operation(
-            description = "Recommend 3 restaurants to User",
-            summary = "Recommend",
-            requestBody =@io.swagger.v3.oas.annotations.parameters.RequestBody(
-                    description = "Restausrants Infos",
-                    content = @Content(
-                            mediaType = "application/json",
-                            schema = @Schema(
-                                    implementation = RecommendRestaurantRequest.class
-                            ),
-                            examples = {
-                                    @ExampleObject(
-                                            name = "Update User Review",
-                                            summary = "Update",
-                                            description = "Recommend 3 restaurants according to the proximity value in km determined by the user.",
-                                            value = "{\n" +
-                                                    "  \"userId\": 1,\n" +
-                                                    "  \"maxDistance\": 5000\n" +
-                                                    "}"
-                                    )
-                            }
-                    )
-            )
-    )
-    @GetMapping("/{id}")
+//    @Operation(
+//            description = "Recommend 3 restaurants to User",
+//            summary = "Recommend",
+//            requestBody =@io.swagger.v3.oas.annotations.parameters.RequestBody(
+//                    description = "Restaurants Infos",
+//                    content = @Content(
+//                            mediaType = "application/json"
+//                    )
+//            )
+//    )
+    @PostMapping("/{id}")
     public ResponseEntity<RestResponse<List<RestaurantDTO>>> recommendRestaurants(@PathVariable Long id, @RequestBody RecommendRestaurantRequest recommendRestaurantRequest){
         return ResponseEntity.ok(RestResponse.of(this.recommendRestaurantControllerContract.recommendRestaurants(recommendRestaurantRequest)));
     }

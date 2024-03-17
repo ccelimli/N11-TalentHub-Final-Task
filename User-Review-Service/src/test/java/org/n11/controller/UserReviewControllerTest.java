@@ -60,7 +60,7 @@ public class UserReviewControllerTest extends BaseControllerTest {
 
     @Test
     void shouldSaveUserReview() throws Exception{
-        UserReviewSaveRequest userReviewSaveRequest= new UserReviewSaveRequest(2L, "6753caed-b072-464a-81b3-37e35129dd10", "Great food!", 5);
+        UserReviewSaveRequest userReviewSaveRequest= new UserReviewSaveRequest(2L, "2480e2c0-2759-4047-83a0-5583941c96a9", "Great food!", 5);
         String requestAsString= objectMapper.writeValueAsString(userReviewSaveRequest);
 
         MvcResult mvcResult=mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/user-reviews")
@@ -75,7 +75,7 @@ public class UserReviewControllerTest extends BaseControllerTest {
     @Test
     void shouldDeleteUserReview()throws Exception{
 
-        MvcResult mvcResult=mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/user-reviews/254"))
+        MvcResult mvcResult=mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/user-reviews/253"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
         boolean success=isSuccess(mvcResult);
@@ -100,11 +100,13 @@ public class UserReviewControllerTest extends BaseControllerTest {
 
     @Test
     void shouldFindByRestaurantId() throws Exception{
-        MvcResult mvcResult=mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/user-reviews/with-restaurants/24d9e003-aa1c-459e-899c-415999643999"))
+        MvcResult mvcResult=mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/user-reviews/with-restaurants/2480e2c0-2759-4047-83a0-5583941c96a9"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
 
         boolean success=isSuccess(mvcResult);
         assertTrue(success);
     }
+
+
 }
