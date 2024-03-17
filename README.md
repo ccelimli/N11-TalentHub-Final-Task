@@ -1,5 +1,8 @@
 # N11 TalentHub
 
+#### ``` You can find the UNIT AND INTEGRATION TESTS of the relevant services under the test folder of the service. ```
+
+
 This repository contains three separate Spring projects: User Review Service, User Service, and Restaurant Service. Each is designed to manage user reviews, process user information, and provide restaurant details, respectively.
 
 ## About the Projects
