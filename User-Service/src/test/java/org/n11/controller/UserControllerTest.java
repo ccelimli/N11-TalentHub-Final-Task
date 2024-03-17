@@ -112,7 +112,7 @@ public class UserControllerTest extends BaseControllerTest {
 
         String requestAsString= objectMapper.writeValueAsString(userUpdateRequest);
 
-        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.put("/api/v1/users/10")
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.put("/api/v1/users/2")
                         .content(requestAsString)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -127,7 +127,7 @@ public class UserControllerTest extends BaseControllerTest {
 
     @Test
     void shouldActive() throws Exception {
-        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.patch("/api/v1/users/active/7"))
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.patch("/api/v1/users/active/10"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
 
@@ -137,7 +137,7 @@ public class UserControllerTest extends BaseControllerTest {
 
     @Test
     void shouldDeactive() throws Exception {
-        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.patch("/api/v1/users/deactive/7"))
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.patch("/api/v1/users/deactive/9"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
 
@@ -158,11 +158,21 @@ public class UserControllerTest extends BaseControllerTest {
 
     @Test
     void shouldFindByIdInDeactives() throws Exception {
-        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/users/with-deactives/8"))
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/users/with-deactives/9"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
 
         boolean success = isSuccess(mvcResult);
-        assertTrue(true);
+        assertTrue(success);
+    }
+
+    @Test
+    void shouldDeleteUser() throws Exception {
+        MvcResult mvcResult= mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/users/13"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andReturn();
+
+        boolean success= isSuccess(mvcResult);
+        assertTrue(success);
     }
 }

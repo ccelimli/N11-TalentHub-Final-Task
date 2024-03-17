@@ -176,6 +176,16 @@ public class RestaurantController {
         return ResponseEntity.ok(RestResponse.of(this.restaurantControllerContact.changeToActivity(restaurantUpdateActivityRequest)));
     }
 
+    @Operation(
+            description = " Find Restaurants containing the specified string expression in their name",
+            summary = "Find By Name",
+            requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
+                    description = "Restaurant Name",
+                    content = @Content(
+                            mediaType = "application/json"
+                    )
+            )
+    )
     @GetMapping("/with-restaurants/{name}")
     public ResponseEntity<RestResponse<List<RestaurantDTO>>> findByName(@PathVariable String name){
         return ResponseEntity.ok(RestResponse.of(this.restaurantControllerContact.findByName(name)));

@@ -43,16 +43,16 @@ public class RecommendRestaurantController {
         return ResponseEntity.ok(RestResponse.of(this.recommendRestaurantControllerContract.getAllRestaurants()));
     }
 
-//    @Operation(
-//            description = "Recommend 3 restaurants to User",
-//            summary = "Recommend",
-//            requestBody =@io.swagger.v3.oas.annotations.parameters.RequestBody(
-//                    description = "Restaurants Infos",
-//                    content = @Content(
-//                            mediaType = "application/json"
-//                    )
-//            )
-//    )
+    @Operation(
+            description = "Recommend 3 restaurants to User",
+            summary = "Recommend",
+            requestBody =@io.swagger.v3.oas.annotations.parameters.RequestBody(
+                    description = "Restaurants Infos",
+                    content = @Content(
+                            mediaType = "application/json"
+                    )
+            )
+    )
     @PostMapping("/{id}")
     public ResponseEntity<RestResponse<List<RestaurantDTO>>> recommendRestaurants(@PathVariable Long id, @RequestBody RecommendRestaurantRequest recommendRestaurantRequest){
         return ResponseEntity.ok(RestResponse.of(this.recommendRestaurantControllerContract.recommendRestaurants(recommendRestaurantRequest)));
