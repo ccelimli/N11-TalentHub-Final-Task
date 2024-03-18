@@ -50,13 +50,13 @@ First, navigate to the root directory of the project. Then, execute the followin
 ## User Review Service Dockerized
 First, navigate to the root directory of the project. Then, execute the following command to Dockerize the API project using the Dockerfile.
 ```shell
-    docker build -t user-service:0.0.1 .
+    docker build -t user-review-service:0.0.1 .
 ```
 
 ## Restaurant Service Dockerized
 First, navigate to the root directory of the project. Then, execute the following command to Dockerize the API project using the Dockerfile.
 ```shell
-    docker build -t user-service:0.0.1 .
+    docker build -t restaurant-service:0.0.1 .
 ```
 
  After Dockerizing all services, bring up all services using the compose file in the root directory of the main project.
